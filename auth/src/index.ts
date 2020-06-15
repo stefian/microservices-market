@@ -5,7 +5,7 @@ const app = express();
 app.use(json());
 
 app.get("/api/users/currentuser", (req, res) => {
-  res.send("Hi there!");
+  res.send("Hi there! / local dev with Docker Desktop K8s cluster");
 });
 
 app.listen(3000, () => {
