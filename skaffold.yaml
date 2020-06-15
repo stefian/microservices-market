@@ -7,8 +7,10 @@ deploy:
 build:
   local:
     push: false
+  # googleCloudBuild:
+  #   projectId: aibazar-dev
   artifacts:
-    - image: stefian22/auth
+    - image: stefian22/auth # or for GCP: us.gcr.io/aibazar-dev/auth
       context: auth
       docker:
         dockerfile: Dockerfile

@@ -15,6 +15,7 @@ spec:
       containers:
         - name: auth
           image: stefian22/auth
+          # image: us.gcr.io/aibazar-dev/auth
 ---
 apiVersion: v1
 kind: Service
