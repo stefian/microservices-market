@@ -14,8 +14,13 @@ spec:
     spec:
       containers:
         - name: auth
-          image: stefian22/auth
-          # image: us.gcr.io/aibazar-dev/auth
+          image: stefian22/auth # image: us.gcr.io/aibazar-dev/auth
+          env:
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
 ---
 apiVersion: v1
 kind: Service
