@@ -16,4 +16,15 @@ spec:
         - name: client
           image: stefian22/client # image: us.gcr.io/aibazar-dev/client
 ---
-
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-srv
+spec:
+  selector:
+    app: client
+  ports:
+    - name: client
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
