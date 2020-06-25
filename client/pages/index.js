@@ -12,6 +12,16 @@ LandingPage.getInitialProps = async () => {  // Request executed on the server /
   if (typeof window === 'undefined') {  // window only exists on the browser / not on server
     // we are on the server
     // => requests should be made to http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
+    // http://SERVICENAME.NAMESPACE.svc.cluster.local
+    const { data } = await axios.get(
+      'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/users/currentuser', {
+      headers: {
+        Host: 'aibazar.dev'
+      }
+    }
+    );
+
+    return data;
   } else {
     // we are on the browser!
     // requests can be made with a base url of '' - the browser will put the base url for us
