@@ -8,10 +8,13 @@ const LandingPage = ({ currentUser }) => { // request executed from the browser
 }
 
 LandingPage.getInitialProps = async () => {  // Request executed on the server / client k8 pod
-  // const response = await axios.get('/api/users/currentuser');
-
-  // return response.data;
-  console.log('I WAS EXECUTED');
+  if (typeof window === 'undefined') {  // window only exists on the browser / not on server
+    // we are on the server
+    // => requests should be made to http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
+  } else {
+    // we are on the browser!
+    // requests can be made with a base url of '' - the browser will put the base url for us
+  }
   return {};
 };
 
