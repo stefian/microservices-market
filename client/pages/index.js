@@ -1,4 +1,4 @@
-import axios from 'axios';
+import buildClient from '../api/build-client';
 
 const LandingPage = ({ currentUser }) => { // request executed from the browser
   // console.log(currentUser);
@@ -8,25 +8,10 @@ const LandingPage = ({ currentUser }) => { // request executed from the browser
   return <h1>Landing Page</h1>
 }
 
-LandingPage.getInitialProps = async ({ req }) => {  // Request executed on the server / client k8 pod
-  if (typeof window === 'undefined') {  // window only exists on the browser / not on server
-    // we are on the server
-    // => requests should be made to http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
-    // http://SERVICENAME.NAMESPACE.svc.cluster.local
-    const { data } = await axios.get(
-      'http://ingress-nginx-controller.ingress-nginx.svc.cluster.local/api/users/currentuser', {
-      headers: req.headers
-    }
-    );
+LandingPage.getInitialProps = async (context) => {  // Request executed on the server / client k8 pod
+  const { data } = await buildClient(context).get('/api/users/currentuser');
 
-    return data;
-  } else {
-    // we are on the browser!
-    // requests can be made with a base url of '' - the browser will put the base url for us
-    const { data } = await axios.get('/api/users/currentuser');
-    return data;
-  }
-  return {};
+  return data;
 };
 
 export default LandingPage;
