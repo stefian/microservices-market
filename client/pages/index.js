@@ -3,6 +3,7 @@ import axios from 'axios';
 const LandingPage = ({ currentUser }) => { // request executed from the browser
   // console.log(currentUser);
   // axios.get('/api/users/currentuser'); // from browser baseURL = ''
+  console.log(currentUser);
 
   return <h1>Landing Page</h1>
 }
@@ -14,6 +15,8 @@ LandingPage.getInitialProps = async () => {  // Request executed on the server /
   } else {
     // we are on the browser!
     // requests can be made with a base url of '' - the browser will put the base url for us
+    const { data } = await axios.get('/api/users/currentuser');
+    return data;
   }
   return {};
 };
