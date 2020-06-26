@@ -2,3 +2,4 @@ node_modules
 auth/node_modules
 client/node_modules
 client/.next
+common/
