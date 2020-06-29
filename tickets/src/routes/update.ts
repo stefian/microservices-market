@@ -33,6 +33,12 @@ router.put(
       throw new NotAuthorizedError();
     }
 
+    ticket.set({
+      title: req.body.title,
+      price: req.body.price,
+    }); // makes the updates in memory, not persisted to db
+    await ticket.save(); // persist in db
+
     res.send(ticket);
   }
 );
