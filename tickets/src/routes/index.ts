@@ -8,3 +8,5 @@ router.get("/api/tickets", async (req: Request, res: Response) => {
 
   res.send(tickets);
 });
+
+export { router as indexTicketRouter };
