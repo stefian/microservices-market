@@ -1,8 +1,9 @@
 import nats, { Message } from "node-nats-streaming";
+import { randomBytes } from "crypto";
 
 console.clear();
 
-const stan = nats.connect("aibazar", "123", {
+const stan = nats.connect("aibazar", randomBytes(4).toString("hex"), {
   url: "http://localhost:4222",
 });
 
