@@ -1,5 +1,7 @@
 import nats from "node-nats-streaming";
 
+console.clear();
+
 const stan = nats.connect("aibazar", "abc", {
   url: "http://localhost:4222",
 }); // in docs client is named: stan / nats backwards
