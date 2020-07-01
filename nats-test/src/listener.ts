@@ -10,6 +10,11 @@ const stan = nats.connect("aibazar", randomBytes(4).toString("hex"), {
 stan.on("connect", () => {
   console.log("Listener connected to NATS");
 
+  stan.on("close", () => {
+    console.log("NATS connection closed!");
+    process.exit();
+  });
+
   const options = stan.subscriptionOptions().setManualAckMode(true);
   const subscription = stan.subscribe(
     "ticket:created",
@@ -29,3 +34,6 @@ stan.on("connect", () => {
     msg.ack();
   });
 });
+
+process.on("SIGINT", () => stan.close()); // Interrupt signal / CTRL-C => first close client connection
+process.on("SIGTERM", () => stan.close()); // Terminate signal => first close client connection
