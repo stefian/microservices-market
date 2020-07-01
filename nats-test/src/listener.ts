@@ -25,5 +25,7 @@ stan.on("connect", () => {
         `Received event #${msg.getSequence()}, with data: ${data}`
       );
     }
+
+    msg.ack();
   });
 });
