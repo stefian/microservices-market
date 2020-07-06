@@ -13,7 +13,7 @@ const start = async () => {
   try {
     await natsWrapper.connect(
       "aibazar",
-      "laskjf",
+      "ladskjf",
       "http://nats-srv:4222"
     );
     await mongoose.connect(process.env.MONGO_URI, {
