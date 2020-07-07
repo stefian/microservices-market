@@ -1,1 +1,11 @@
-export const natsWrapper = {};
+export const natsWrapper = {
+  client: {
+    publish: (
+      subject: string,
+      data: string,
+      callback: () => void
+    ) => {
+      callback();
+    },
+  },
+};
