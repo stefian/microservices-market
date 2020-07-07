@@ -7,6 +7,8 @@ import {
   NotAuthorizedError,
 } from "@w3ai/common";
 import { Ticket } from "../models/ticket";
+import { TicketUpdatedPublisher } from "../events/publishers/ticket-updated-publisher";
+import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -38,6 +40,12 @@ router.put(
       price: req.body.price,
     }); // makes the updates in memory, not persisted to db
     await ticket.save(); // persist in db
+    new TicketUpdatedPublisher(natsWrapper.client).publish({
+      id: ticket.id,
+      title: ticket.title,
+      price: ticket.price,
+      userId: ticket.userId,
+    });
 
     res.send(ticket);
   }
