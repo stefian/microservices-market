@@ -7,10 +7,12 @@ import {
   NotFoundError,
   currentUser,
 } from "@w3ai/common";
-import { createTicketRouter } from "./routes/new";
-import { showTicketRouter } from "./routes/show";
-import { indexTicketRouter } from "./routes/index";
-import { updateTicketRouter } from "./routes/update";
+
+import { deleteOrderRouter } from "./routes/delete";
+import { indexOrderRouter } from "./routes/index";
+import { newOrderRouter } from "./routes/new";
+import { showOrderRouter } from "./routes/show";
+import { updateOrderRouter } from "./routes/update";
 
 const app = express();
 app.set("trust proxy", true); // to allow traffic through ingress-nginx
@@ -23,10 +25,11 @@ app.use(
 );
 app.use(currentUser);
 
-app.use(createTicketRouter);
-app.use(showTicketRouter);
-app.use(indexTicketRouter);
-app.use(updateTicketRouter);
+app.use(deleteOrderRouter);
+app.use(indexOrderRouter);
+app.use(newOrderRouter);
+app.use(showOrderRouter);
+app.use(updateOrderRouter);
 
 app.all("*", async (req, res) => {
   throw new NotFoundError();
