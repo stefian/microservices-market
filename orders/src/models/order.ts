@@ -1,5 +1,6 @@
 import mongoose, { Mongoose } from "mongoose";
 import { OrderStatus } from "@w3ai/common";
+import { TicketDoc } from "./ticket";
 
 interface OrderAttrs {
   userId: string;
