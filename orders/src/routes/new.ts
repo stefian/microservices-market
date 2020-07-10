@@ -4,6 +4,8 @@ import {
   requireAuth,
   validateRequest,
   NotFoundError,
+  OrderStatus,
+  BadRequestError,
 } from "@w3ai/common";
 import { body } from "express-validator";
 import { Ticket } from "../models/ticket";
@@ -34,6 +36,22 @@ router.post(
     }
 
     // Make sure that this ticket is not already reserved - Many users might try to buy the same ticket at the same time
+    // Run query to look at all orders. Find an order where the ticket
+    // is the ticket we just found *and* the orders status is *not* cancelled.
+    // If we find an order from that means the ticket *is* reserved
+    const existingOrder = await Order.findOne({
+      ticket: ticket,
+      status: {
+        $in: [
+          OrderStatus.Created,
+          OrderStatus.AwaitingPayment,
+          OrderStatus.Complete,
+        ],
+      },
+    });
+    if (existingOrder) {
+      throw new BadRequestError("Ticket is already reserved");
+    }
 
     // calculate an expiration date for this order
 
