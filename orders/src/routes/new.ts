@@ -50,10 +50,17 @@ router.post(
     );
 
     // Build the order and save it to the database
+    const order = Order.build({
+      userId: req.currentUser!.id,
+      status: OrderStatus.Created,
+      expiresAt: expiration,
+      ticket,
+    });
+    await order.save();
 
     // Publish an event saying that an order was created
 
-    res.send({});
+    res.status(201).send(order);
   }
 );
 
