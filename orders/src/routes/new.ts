@@ -13,6 +13,8 @@ import { Order } from "../models/order";
 
 const router = express.Router();
 
+const EXPIRATION_WINDOW_SECONDS = 15 * 60; // 15mins in seconds
+
 router.post(
   "/api/orders",
   requireAuth,
@@ -42,6 +44,10 @@ router.post(
     }
 
     // calculate an expiration date for this order
+    const expiration = new Date(); // = Now - Current Date/Time
+    expiration.setSeconds(
+      expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS
+    );
 
     // Build the order and save it to the database
 
