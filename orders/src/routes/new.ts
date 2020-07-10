@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 import express, { Request, Response } from "express";
-import { requireAuth, validateRequest } from "@w3ai/common";
+import {
+  requireAuth,
+  validateRequest,
+  NotFoundError,
+} from "@w3ai/common";
 import { body } from "express-validator";
 import { Ticket } from "../models/ticket";
 import { Order } from "../models/order";
@@ -21,7 +25,13 @@ router.post(
   ],
   validateRequest,
   async (req: Request, res: Response) => {
+    const { ticketId } = req.body;
+
     // Find the ticket the user is trying to order in the database
+    const ticket = await Ticket.findById(ticketId);
+    if (!ticket) {
+      throw new NotFoundError();
+    }
 
     // Make sure that this ticket is not already reserved - Many users might try to buy the same ticket at the same time
 
