@@ -48,4 +48,6 @@ it("fetches orders for a particular user", async () => {
 
   // Make sure we only got the orders for User #2
   expect(response.body.length).toEqual(2);
+  expect(response.body[0].id).toEqual(orderOne.id);
+  expect(response.body[1].id).toEqual(orderTwo.id);
 });
