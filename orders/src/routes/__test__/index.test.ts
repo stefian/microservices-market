@@ -29,12 +29,12 @@ it("fetches orders for a particular user", async () => {
     .expect(201);
 
   // Create 2 orders as User #2
-  const responseOne = await request(app)
+  const { body: orderOne } = await request(app)
     .post("/api/orders")
     .set("Cookie", userTwo)
     .send({ ticketId: ticketTwo.id })
     .expect(201);
-  const responseTwo = await request(app)
+  const { body: orderTwo } = await request(app)
     .post("/api/orders")
     .set("Cookie", userTwo)
     .send({ ticketId: ticketThree.id })
