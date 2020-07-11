@@ -29,12 +29,12 @@ it("fetches orders for a particular user", async () => {
     .expect(201);
 
   // Create 2 orders as User #2
-  await request(app)
+  const responseOne = await request(app)
     .post("/api/orders")
     .set("Cookie", userTwo)
     .send({ ticketId: ticketTwo.id })
     .expect(201);
-  await request(app)
+  const responseTwo = await request(app)
     .post("/api/orders")
     .set("Cookie", userTwo)
     .send({ ticketId: ticketThree.id })
@@ -47,5 +47,5 @@ it("fetches orders for a particular user", async () => {
     .expect(200);
 
   // Make sure we only got the orders for User #2
-  console.log(response.body);
+  expect(response.body.length).toEqual(2);
 });
