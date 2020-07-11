@@ -41,5 +41,11 @@ it("fetches orders for a particular user", async () => {
     .expect(201);
 
   // Make request to get orders for User #2
+  const response = await request(app)
+    .get("/api/orders")
+    .set("Cookie", userTwo)
+    .expect(200);
+
   // Make sure we only got the orders for User #2
+  console.log(response.body);
 });
