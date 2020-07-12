@@ -1,0 +1,7 @@
+import { Publisher, OrderCreatedEvent, Subjects } from "@w3ai/common";
+
+export class OrderCreatedPublisher extends Publisher<
+  OrderCreatedEvent
+> {
+  readonly subject = Subjects.OrderCreated;
+}
