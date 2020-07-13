@@ -40,7 +40,11 @@ const ticketSchema = new mongoose.Schema(
 );
 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
-  return new Ticket(attrs);
+  return new Ticket({
+    _id: attrs.id,
+    title: attrs.title,
+    price: attrs.price,
+  });
 };
 // Run query to look at all orders. Find an order where the ticket
 // is the ticket we just found *and* the orders status is *not* cancelled.
