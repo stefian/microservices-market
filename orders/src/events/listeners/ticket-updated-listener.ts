@@ -16,9 +16,15 @@ export class TicketUpdatedListener extends Listener<
       throw new Error("Ticket not found");
     }
 
-    const { title, price } = data;
-    ticket.set({ title, price });
+    // Versioning WITHOUT NPM module - mongoose-update-if-current
+    const { title, price, version } = data;
+    ticket.set({ title, price, version });
     await ticket.save();
+
+    // Versioning with NPM module - mongoose-update-if-current
+    // const { title, price } = data;
+    // ticket.set({ title, price });
+    // await ticket.save();
 
     msg.ack();
   }
