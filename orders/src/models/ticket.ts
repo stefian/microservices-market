@@ -47,19 +47,7 @@ const ticketSchema = new mongoose.Schema(
 );
 
 ticketSchema.set("versionKey", "version");
-// ticketSchema.plugin(updateIfCurrentPlugin);
-
-// Setting a mongoose pre save hook: // when NOT using the updateIfCurrentPlugin
-ticketSchema.pre("save", function (done) {
-  // @ts-ignore
-  this.$where = {
-    // assuming versioning is incremented by 1 on each update
-    // to change to 10, 100, etc eg: => version: this.get('version') - 100
-    version: this.get("version") - 1,
-  };
-
-  done();
-}); // middleware that will run anytime we save() a record
+ticketSchema.plugin(updateIfCurrentPlugin);
 
 ticketSchema.statics.findByEvent = (event: {
   id: string;
