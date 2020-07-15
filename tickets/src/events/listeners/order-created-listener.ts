@@ -3,7 +3,6 @@ import { Listener, OrderCreatedEvent, Subjects } from "@w3ai/common";
 import { queueGroupName } from "./queue-group-name";
 import { Ticket } from "../../models/ticket";
 import { TicketUpdatedPublisher } from "../publishers/ticket-updated-publisher";
-import { natsWrapper } from "../../nats-wrapper";
 
 export class OrderCreatedListener extends Listener<
   OrderCreatedEvent
@@ -23,9 +22,16 @@ export class OrderCreatedListener extends Listener<
     // Mark the ticket as being reserved by setting its orderId property
     ticket.set({ orderId: data.id });
 
-    // Save the ticket
+    // Save the  ticket and publish a TicketUpdated message
     await ticket.save();
-    new TicketUpdatedPublisher(natsWrapper.client);
+    await new TicketUpdatedPublisher(this.client).publish({
+      id: ticket.id,
+      price: ticket.price,
+      title: ticket.title,
+      userId: ticket.userId,
+      orderId: ticket.orderId,
+      version: ticket.version,
+    });
 
     // ack the message
     msg.ack();
