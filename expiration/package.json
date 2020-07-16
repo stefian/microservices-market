@@ -18,7 +18,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/bull": "^3.14.0",
     "@w3ai/common": "^1.0.10",
+    "bull": "^3.16.0",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.9.5"
   },
