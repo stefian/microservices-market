@@ -34,3 +34,9 @@ const setup = async () => {
 
   return { listener, order, ticket, data, msg };
 };
+
+it("updates the order status to cancelled", async () => {});
+
+it("emit an OrderCancelled event", async () => {});
+
+it("ack the message", async () => {});
