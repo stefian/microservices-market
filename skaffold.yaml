@@ -42,3 +42,11 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: stefian22/expiration # or for GCP: us.gcr.io/aibazar-dev/expiration
+      context: expiration
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
