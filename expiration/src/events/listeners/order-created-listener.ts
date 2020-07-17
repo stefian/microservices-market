@@ -10,12 +10,19 @@ export class OrderCreatedListener extends Listener<
   queueGroupName = queueGroupName;
 
   async onMessage(data: OrderCreatedEvent["data"], msg: Message) {
+    const delay =
+      new Date(data.expiresAt).getTime() - new Date().getTime(); // the delay time in miliseconds
+    console.log(
+      "Waiting this may miliseconds to process the job",
+      delay
+    );
+
     await expirationQueue.add(
       {
         orderId: data.id,
       },
       {
-        delay: 10000, // 10 seconds
+        delay, // the delay in millisecond calculated above
       }
     );
 
