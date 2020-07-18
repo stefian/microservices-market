@@ -16,4 +16,6 @@ interface OrderDoc extends mongoose.Document {
   status: OrderStatus;
 }
 
-interface OrderModel extends mongoose.Model<OrderDoc> {}
+interface OrderModel extends mongoose.Model<OrderDoc> {
+  build(attrs: OrderAttrs): OrderDoc;
+}
