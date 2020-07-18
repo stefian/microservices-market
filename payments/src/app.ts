@@ -7,10 +7,6 @@ import {
   NotFoundError,
   currentUser,
 } from "@w3ai/common";
-import { createTicketRouter } from "./routes/new";
-import { showTicketRouter } from "./routes/show";
-import { indexTicketRouter } from "./routes/index";
-import { updateTicketRouter } from "./routes/update";
 
 const app = express();
 app.set("trust proxy", true); // to allow traffic through ingress-nginx
