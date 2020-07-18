@@ -9,6 +9,11 @@ interface OrderAttrs {
   status: OrderStatus;
 }
 
-interface OrderDoc extends mongoose.Document {}
+interface OrderDoc extends mongoose.Document {
+  version: number;
+  userId: string;
+  price: number;
+  status: OrderStatus;
+}
 
 interface OrderModel extends mongoose.Model<OrderDoc> {}
