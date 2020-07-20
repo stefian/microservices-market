@@ -42,12 +42,16 @@ it("returns a 400 when purchasing a cancelled order", async () => {
     userId,
     version: 0,
     price: 20,
-    status: OrderStatus.Created,
+    status: OrderStatus.Cancelled,
   });
   await order.save();
 
   await request(app)
-    .post('/api/payments')
-    .set('Cookie', global.signin(userId))
-    .
+    .post("/api/payments")
+    .set("Cookie", global.signin(userId))
+    .send({
+      orderId: order.id,
+      token: "asdfa",
+    })
+    .expect(400);
 });
