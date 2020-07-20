@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 declare global {
   namespace NodeJS {
     interface Global {
-      signin(): string[]; // because cookie is a string[] - array of strings
+      signin(id?: string): string[]; // because cookie is a string[] - array of strings
     }
   }
 }
