@@ -89,6 +89,7 @@ it("returns a 204 with valid inputs", async () => {
   });
 
   expect(stripeCharge).toBeDefined();
+  expect(stripeCharge!.currency).toEqual("usd");
 
   // Uncomment if switching to using the __mocks__/stripe.ts
   // const chargeOptions = (stripe.charges.create as jest.Mock).mock
