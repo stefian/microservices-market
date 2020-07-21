@@ -80,6 +80,9 @@ it("returns a 204 with valid inputs", async () => {
     })
     .expect(201);
 
+  // increase timeout beyond the 5 secs to allow the resonse from Stripe
+  jest.setTimeout(30000);
+
   const stripeCharges = await stripe.charges.list({ limit: 50 });
   const stripeCharge = stripeCharges.data.find((charge) => {
     return charge.amount === price * 100; // return true on this search condition
