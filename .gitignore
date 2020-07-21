@@ -4,3 +4,4 @@ client/node_modules
 client/.next
 common/
 nats-test/node_modules
+payments/src/test/env-var.ts

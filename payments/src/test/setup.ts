@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import request from "supertest";
 import { app } from "../app";
 import jwt from "jsonwebtoken";
+import { STRIPE_TEST } from "./env-var";
 
 declare global {
   namespace NodeJS {
@@ -13,6 +14,8 @@ declare global {
 }
 
 jest.mock("../nats-wrapper");
+
+process.env.STRIPE_KEY = STRIPE_TEST;
 
 let mongo: any;
 beforeAll(async () => {
