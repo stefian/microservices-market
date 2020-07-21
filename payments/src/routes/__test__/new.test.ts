@@ -4,6 +4,7 @@ import { app } from "../../app";
 import { Order } from "../../models/order";
 import { OrderStatus } from "@w3ai/common";
 import { stripe } from "../../stripe";
+import { Payment } from "../../models/payment";
 
 // jest.mock("../../stripe");
 
@@ -59,7 +60,7 @@ it("returns a 400 when purchasing a cancelled order", async () => {
     .expect(400);
 });
 
-it("returns a 204 with valid inputs", async () => {
+it("returns a 201 with valid inputs", async () => {
   const userId = mongoose.Types.ObjectId().toHexString();
   const price = Math.floor(Math.random() * 1000);
   const order = Order.build({
@@ -90,6 +91,13 @@ it("returns a 204 with valid inputs", async () => {
 
   expect(stripeCharge).toBeDefined();
   expect(stripeCharge!.currency).toEqual("usd");
+
+  // Confirm a payment was saved in our payments collection
+  const payment = await Payment.findOne({
+    orderId: order.id,
+    stripeId: stripeCharge!.id,
+  });
+  expect(payment).not.toBeNull();
 
   // Uncomment if switching to using the __mocks__/stripe.ts
   // const chargeOptions = (stripe.charges.create as jest.Mock).mock
