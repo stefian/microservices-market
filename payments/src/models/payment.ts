@@ -5,6 +5,11 @@ interface PaymentAttrs {
   stripeId: string;
 }
 
-interface PaymentDoc extends mongoose.Document {}
+interface PaymentDoc extends mongoose.Document {
+  orderId: string;
+  stripeId: string;
+}
 
-interface PaymentModel extends mongoose.Model<PaymentDoc> {}
+interface PaymentModel extends mongoose.Model<PaymentDoc> {
+  build(attrs: PaymentAttrs): PaymentDoc;
+}
