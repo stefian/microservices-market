@@ -40,7 +40,7 @@ router.post(
       description: "payment to " + order.userId + " for " + orderId,
     });
 
-    res.send({ success: true });
+    res.status(201).send({ success: true });
   }
 );
 
