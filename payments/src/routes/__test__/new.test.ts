@@ -5,7 +5,7 @@ import { Order } from "../../models/order";
 import { OrderStatus } from "@w3ai/common";
 import { stripe } from "../../stripe";
 
-jest.mock("../../stripe");
+// jest.mock("../../stripe");
 
 it("returns a 404 when puschasing an order that does not exist", async () => {
   await request(app)
