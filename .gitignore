@@ -2,6 +2,7 @@ node_modules
 auth/node_modules
 client/node_modules
 client/.next
+client/.env.local
 common/
 nats-test/node_modules
 payments/src/test/env-var.ts
