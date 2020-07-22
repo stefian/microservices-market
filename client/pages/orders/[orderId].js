@@ -1,5 +1,7 @@
 const OrderShow = ({ order }) => {
-  return <div>OrderShow</div>;
+  const msLeft = new Date(order.expiresAt) - new Date();
+
+  return <div>{msLeft / 1000} seconds until order expires</div>;
 };
 
 OrderShow.getInitialProps = async (context, client) => {
