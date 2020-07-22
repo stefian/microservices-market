@@ -15,7 +15,9 @@ const NewTicket = () => {
       </div>
       <div className="form-group">
         <label>Price</label>
-        <input className="form-control" />
+        <input value={price}
+          onChange={(e) => setPrice(e.target.value)}
+          className="form-control" />
       </div>
       <button className="btn btn-primary">Submit</button>
     </form>
