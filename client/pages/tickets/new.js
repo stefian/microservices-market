@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Router from 'next/router';
 import useRequest from '../../hooks/use-request';
 
 const NewTicket = () => {
@@ -10,7 +11,7 @@ const NewTicket = () => {
     body: {
       title, price
     },
-    onSuccess: (ticket) => console.log(ticket)
+    onSuccess: () => Router.push('/'),
   });
 
   const onSubmit = (event) => {
