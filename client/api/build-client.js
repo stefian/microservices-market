@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+// build appropriate axios client for server or browser
 export default ({ req }) => {
   if (typeof window === 'undefined') {
     // We are on the server
