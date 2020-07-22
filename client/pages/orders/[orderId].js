@@ -1,7 +1,23 @@
-const OrderShow = ({ order }) => {
-  const msLeft = new Date(order.expiresAt) - new Date();
+import { useEffect, useState } from 'react';
 
-  return <div>{msLeft / 1000} seconds until order expires</div>;
+const OrderShow = ({ order }) => {
+  const [timeLeft, setTimeLeft] = useState(''); // to help rendering once
+
+  useEffect(() => {
+    const findTimeLeft = () => {
+      const msLeft = new Date(order.expiresAt) - new Date();
+      setTimeLeft(Math.round(msLeft / 1000));
+    };
+
+    findTimeLeft(); // Call finction To avoid waiting 1000 ms before first rendering
+    const timerId = setInterval(findTimeLeft, 1000);
+
+    return () => {  // this will cancell the interval when navigating from this component
+      clearInterval(timerId);
+    };
+  }, [order]); // [] - empty array - to render once
+
+  return <div>Time left to pay: {timeLeft} seconds</div>;
 };
 
 OrderShow.getInitialProps = async (context, client) => {
