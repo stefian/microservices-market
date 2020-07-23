@@ -1,4 +1,5 @@
 node_modules
+.DS_Store
 auth/node_modules
 client/node_modules
 client/.next
