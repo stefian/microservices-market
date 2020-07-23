@@ -6,4 +6,4 @@ client/.next
 client/.env.local
 common/
 nats-test/node_modules
-payments/src/test/env-var.ts
+# payments/src/test/env-var.ts
