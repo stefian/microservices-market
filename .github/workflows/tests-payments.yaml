@@ -2,6 +2,8 @@ name: tests-payments
 
 on:
   pull_request: # any time PR created, updated or re-opened
+    paths:
+      - "payments/**" # only if changes in payments dir
 
 jobs:
   build: # starts a vm

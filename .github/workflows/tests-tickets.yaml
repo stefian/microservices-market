@@ -2,6 +2,8 @@ name: tests-tickets
 
 on:
   pull_request: # any time PR created, updated or re-opened
+    paths:
+      - "tickets/**" # only if changes in tickets dir
 
 jobs:
   build: # starts a vm

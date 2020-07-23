@@ -1,13 +1,14 @@
 name: tests-auth
 
-on: 
-  pull_request:   # any time PR created, updated or re-opened
+on:
+  pull_request: # any time PR created, updated or re-opened
+    paths:
+      - "auth/**" # only if changes in auth dir
 
 jobs:
-  build:    # starts a vm 
+  build: # starts a vm
     runs-on: ubuntu-latest
-    steps: 
-      - uses: actions/checkout@v2  # takes all code of the project
-      - run: cd auth && npm install && npm run && npm run test:ci   # runs test scripts inside auth service
-        
-    
+    steps:
+      - uses: actions/checkout@v2 # takes all code of the project
+      - run: cd auth && npm install && npm run && npm run test:ci # runs test scripts inside auth service
+

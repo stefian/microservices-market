@@ -2,6 +2,8 @@ name: tests-orders
 
 on:
   pull_request: # any time PR created, updated or re-opened
+    paths:
+      - "orders/**" # only if changes in orders dir
 
 jobs:
   build: # starts a vm
