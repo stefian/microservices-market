@@ -1,10 +1,10 @@
 name: deploy-auth
 
 on: 
-  push:   # merging / closing a PR counts like push on masterbranch
+  push:   
     branches:
       - master
-    paths: # if changes in auth/ dir / service
+    paths: 
       - 'auth/**'
 
 jobs: 
