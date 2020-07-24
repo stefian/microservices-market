@@ -7,7 +7,7 @@ metadata:
     nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   rules:
-    - host: aibazar.dev
+    - host: www.w3ai.org
       http:
         paths:
           - path: /api/payments/?(.*)
