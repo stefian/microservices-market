@@ -1,11 +1,11 @@
 name: deploy-auth
 
-on: 
-  push:   
+on:
+  push:
     branches:
       - master
-    paths: 
-      - 'auth/**'
+    paths:
+      - "auth/**"
 
 jobs:
   build:
