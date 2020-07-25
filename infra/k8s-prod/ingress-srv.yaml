@@ -30,7 +30,6 @@ spec:
             backend:
               serviceName: client-srv
               servicePort: 3000
-
 ---
 apiVersion: v1
 kind: Service
