@@ -18,7 +18,8 @@ app.use(json());
 app.use(
   cookieSession({
     signed: false,
-    secure: process.env.NODE_ENV !== "test", // to ensure it will always work on https connection or http for testing
+    secure: false, // as per note 485 - One more small fix // since we dont have HTTPS setup now with Digital Ocean
+    // secure: process.env.NODE_ENV !== "test", // to ensure it will always work on https connection or http for testing
   })
 );
 app.use(currentUser);
